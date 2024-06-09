@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CodeAbbey</title>
-    <meta name="author" content="Rodion Gorkovenko">
-    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
-    {% endblock %}
-</head>
-<body>
-    <div>Welcome to CodeAbbey!</div>
-</body>
-</html>
+{% extends 'app/master.html' %}
+{% block title %}CodeAbbey - programming problems to practice and learn for beginners{% endblock %}
+{% block description %}Collection of programming problems to practice solving, learn to program and code, and win certificates.{% endblock %}
+{% block body %}
+	<div>Welcome to CodeAbbey!</div>
+{% endblock %}

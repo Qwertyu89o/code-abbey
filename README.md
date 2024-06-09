@@ -1,2 +1,3 @@
-# code-abbey
+# Code Abbey
+
 Source code of CodeAbbey web site.

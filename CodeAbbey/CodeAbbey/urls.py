@@ -1,5 +1,13 @@
-from django.urls import include, path
+"""CodeAbbey URL Configuration
+
+The `urlpatterns` list routes URLs to views.
+
+For more information please see:
+https://docs.djangoproject.com/en/3.2/topics/http/urls/
+"""
+
+import django.urls
 
 urlpatterns = [
-    path('', include('app.urls'))
+    django.urls.path('', django.urls.include('app.urls')),
 ]
