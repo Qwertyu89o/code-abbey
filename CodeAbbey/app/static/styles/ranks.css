@@ -1,0 +1,17 @@
+.rank {
+    font-weight: bold;
+    background-repeat: no-repeat;
+    background-size: 16px;
+}
+.rank0 {
+    color: #888;
+}
+.rank1 {
+    color: #4d4;
+}
+.rank2 {
+    color: #0dd;
+}
+.rank3 {
+    color: #44f;
+}

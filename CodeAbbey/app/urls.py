@@ -1,3 +1,7 @@
+"""
+CodeAbbey URL Configuration.
+"""
+
 import django.urls
 from . import views
 

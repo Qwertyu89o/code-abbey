@@ -1,3 +1,7 @@
+"""
+Configuration of CodeAbbey application.
+"""
+
 import django.apps
 
 

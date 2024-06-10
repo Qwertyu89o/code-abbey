@@ -1,4 +1,19 @@
 body {
-    font-family: Arial, serif;
-    font-size: 32px;
+    font-family: Tahoma, Verdana, sans-serif;
+    font-size: 14pt;
 }
+
+table {
+    font-family: Tahoma, Verdana, sans-serif;
+    font-size: 14pt;
+    border-collapse: collapse;
+}
+
+a {
+    color: green;
+    text-decoration: none;
+}
+
+h1 { font-size: 24pt; }
+h2 { font-size: 20pt; }
+h3 { font-size: 18pt; }

@@ -1,6 +1,110 @@
 {% extends 'app/master.html' %}
+{% load static %}
 {% block title %}CodeAbbey - programming problems to practice and learn for beginners{% endblock %}
 {% block description %}Collection of programming problems to practice solving, learn to program and code, and win certificates.{% endblock %}
+{% block head %}
+    {{ block.super }}
+	<link rel="stylesheet" href="{% static 'styles/layout.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/table.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/ranks.css' %}">
+{% endblock %}
 {% block body %}
-	<div>Welcome to CodeAbbey!</div>
+	<div class="filler">
+		<div class="header">
+			<ul>
+				<li>
+					<a href="javascript:void()" title="Login and Main info">
+						Home / Login
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void()" title="Programming problems list">
+						Problems
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void()" title="Free programming school">
+						School
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void()" title="Programmer rating list">
+						Ranking
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void()" title="Forum">
+						Forum
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void()" title="Help">
+						Help
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void()" title="See what is going on CodeAbbey">
+						Mess
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="content">
+			<img
+					style="margin-left: 20px; margin-right: 20px;"
+					src="{% static 'images/facade.gif' %}"
+					alt="Abbey of coding problems">
+			<div style="width: 100%; display: flex;">
+				<div style="width: 100%; align-self: center; text-align: center;">
+					<div class="strong">Top Brethren and Sistren of the Week</div>
+					<a href="javascript:void()">(see best of all times)</a>
+					<table
+							style="width: 75%; text-align: center; margin: 0 auto;"
+							class="table-bordered table-condensed table-striped">
+						<thead>
+							<tr>
+								<th title="User">User</th>
+								<th title="Level">Rank</th>
+								<th title="Solved during last 7 days">Solved</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<a href="javascript:void()">user111</a>
+								</td>
+								<td>
+									<span class="rank rank3">rank3</span>
+								</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="javascript:void()">user222</a>
+								</td>
+								<td>
+									<span class="rank rank2">rank2</span>
+								</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="javascript:void()">user333</a>
+								</td>
+								<td>
+									<span class="rank rank1">rank1</span>
+								</td>
+								<td>1</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<ul>
+				<li>&copy; 2013-2024 by Rodion Gorkovenko,<br>with the help of You All</li>
+			</ul>
+		</div>
+	</div>
 {% endblock %}

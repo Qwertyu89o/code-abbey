@@ -12,7 +12,17 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 import pathlib
-import dj_database_url
+
+# We do not want to import render-specific
+# modules when we are not on render.com.
+import importlib.util
+
+dj_database_url = None
+ON_RENDER_COM = 'RENDER' in os.environ
+if ON_RENDER_COM:
+    dj_database_url_spec = importlib.util.find_spec('dj_database_url')
+    if dj_database_url_spec is not None:
+        dj_database_url = importlib.util.module_from_spec(dj_database_url_spec)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
@@ -26,7 +36,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('ABBEY_PRODUCTION_SERVER') is None
 
-ALLOWED_HOSTS = ['127.0.0.1'] if DEBUG else ['code-abbey.onrender.com']
+if DEBUG:
+    ALLOWED_HOSTS = ['127.0.0.1']
+elif ON_RENDER_COM and 'RENDER_EXTERNAL_HOSTNAME' in os.environ:
+    ALLOWED_HOSTS = os.environ['RENDER_EXTERNAL_HOSTNAME']
+else:
+    ALLOWED_HOSTS = []
 
 # Application definition.
 
@@ -41,7 +56,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -49,6 +63,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if ON_RENDER_COM:
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 ROOT_URLCONF = 'CodeAbbey.urls'
 
@@ -73,33 +90,43 @@ WSGI_APPLICATION = 'CodeAbbey.wsgi.application'
 # Database.
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if DEBUG:
+if ON_RENDER_COM:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='postgresql://user:pass@localhost:123/db',
+            conn_max_age=600
+        )
+    }
+
+if ON_RENDER_COM:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='postgresql://u:p@localhost:1/db',
+            conn_max_age=600
+        )
+    }
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-else:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default='postgresql://postgres:postgres@localhost:5432/mysite',
-            conn_max_age=600
-        )
-    }
 
 # Password validation.
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [{
-    'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
-}, {
-    'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'
-}, {
-    'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'
-}, {
-    'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'
-}]
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
+    }, {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'
+    }, {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'
+    }, {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'
+    }
+]
 
 # Internationalization.
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -115,8 +142,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# This production code might break development mode, so we check whether we're in DEBUG mode
-if not DEBUG: # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+if ON_RENDER_COM:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
     # and renames the files with unique names for each version to support long-term caching

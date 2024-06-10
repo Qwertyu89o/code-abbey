@@ -1,0 +1,41 @@
+.filler {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #e4eeff;
+}
+
+.header {
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+
+.header > ul > li {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.content {
+    background: white;
+    display: flex;
+}
+
+.vertical-aligner {
+    display: flex;
+}
+
+.footer {
+    border-top-style: solid;
+    border-top-color: black;
+}
+
+.footer > ul {
+    list-style-type:none
+}
+
+.footer > ul > li {
+    display: inline-block;
+    margin-right: 1em;
+}

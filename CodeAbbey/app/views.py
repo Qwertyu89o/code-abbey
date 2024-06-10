@@ -1,3 +1,7 @@
+"""
+General views of CodeAbbey site.
+"""
+
 import django.shortcuts
 
 

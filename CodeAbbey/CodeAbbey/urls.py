@@ -1,4 +1,5 @@
-"""CodeAbbey URL Configuration
+"""
+CodeAbbey root URL configuration.
 
 The `urlpatterns` list routes URLs to views.
 
