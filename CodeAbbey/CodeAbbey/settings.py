@@ -18,7 +18,7 @@ import pathlib
 # import importlib.util
 import dj_database_url
 # dj_database_url = None
-# ON_RENDER_COM = 'RENDER' in os.environ
+ON_RENDER_COM = 'RENDER' in os.environ
 # if ON_RENDER_COM:
 #     dj_database_url_spec = importlib.util.find_spec('dj_database_url')
 #     if dj_database_url_spec is not None:
