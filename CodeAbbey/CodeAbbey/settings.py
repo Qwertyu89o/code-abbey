@@ -39,7 +39,7 @@ DEBUG = os.getenv('ABBEY_PRODUCTION_SERVER') is None
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1']
 elif ON_RENDER_COM and 'RENDER_EXTERNAL_HOSTNAME' in os.environ:
-    ALLOWED_HOSTS = os.environ['RENDER_EXTERNAL_HOSTNAME']
+    ALLOWED_HOSTS = [os.environ['RENDER_EXTERNAL_HOSTNAME']]
 else:
     ALLOWED_HOSTS = []
 
