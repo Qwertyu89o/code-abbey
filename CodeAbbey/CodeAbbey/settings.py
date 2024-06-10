@@ -93,14 +93,6 @@ WSGI_APPLICATION = 'CodeAbbey.wsgi.application'
 if ON_RENDER_COM:
     DATABASES = {
         'default': dj_database_url.config(
-            default='postgresql://user:pass@localhost:123/db',
-            conn_max_age=600
-        )
-    }
-
-if ON_RENDER_COM:
-    DATABASES = {
-        'default': dj_database_url.config(
             default='postgresql://u:p@localhost:1/db',
             conn_max_age=600
         )
