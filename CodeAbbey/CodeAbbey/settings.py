@@ -15,14 +15,14 @@ import pathlib
 
 # We do not want to import render-specific
 # modules when we are not on render.com.
-import importlib.util
-
-dj_database_url = None
-ON_RENDER_COM = 'RENDER' in os.environ
-if ON_RENDER_COM:
-    dj_database_url_spec = importlib.util.find_spec('dj_database_url')
-    if dj_database_url_spec is not None:
-        dj_database_url = importlib.util.module_from_spec(dj_database_url_spec)
+# import importlib.util
+import dj_database_url
+# dj_database_url = None
+# ON_RENDER_COM = 'RENDER' in os.environ
+# if ON_RENDER_COM:
+#     dj_database_url_spec = importlib.util.find_spec('dj_database_url')
+#     if dj_database_url_spec is not None:
+#         dj_database_url = importlib.util.module_from_spec(dj_database_url_spec)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
